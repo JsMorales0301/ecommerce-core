@@ -30,6 +30,10 @@ class Conexion{
         return ($this -> resultado != null) ? $this -> resultado -> num_rows : 0;
     }
 
+    public function fetch(){
+        return $this -> resultado -> fetch_assoc();
+    }
+
 }
 
 ?>
