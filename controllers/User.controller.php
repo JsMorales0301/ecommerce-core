@@ -37,10 +37,14 @@ class UserController
     {
         $this->conexion->conectar();
         $this->conexion->ejecutar(($this->userDAO->autenticar()));
-        $this->conexion->cerrarConexion();
         if($this->conexion->numFilas()==1)
         {
-            return $this->conexion->extraer();  
+            $user = $this->conexion->fetch();
+            $this->conexion->cerrarConexion();
+            return $user;  
+        }
+        else{
+            return http_response_code(404);
         }
     }
 

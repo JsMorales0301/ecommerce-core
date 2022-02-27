@@ -13,5 +13,6 @@
         $email = $_REQUEST["email"];
         $password = $_REQUEST["password"];
         $userController = new UserController(null, null, $email, $password, null, null, null);
-        echo json_encode($userController->autenticar());
+        $response = $userController->autenticar();
+        echo json_encode($response);
     }
