@@ -33,7 +33,16 @@ class UserController
         $this->conexion->ejecutar($this->userDAO->crearUsuario());
         $this->conexion->cerrarConexion();
     }
-
+    public function autenticar()
+    {
+        $this->conexion->conectar();
+        $this->conexion->ejecutar(($this->userDAO->autenticar()));
+        $this->conexion->cerrarConexion();
+        if($this->conexion->numFilas()==1)
+        {
+            return $this->conexion->extraer();  
+        }
+    }
 
 
 }
