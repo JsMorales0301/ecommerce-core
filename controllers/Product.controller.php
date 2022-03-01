@@ -29,7 +29,21 @@ class ProductController
     }
 
 
-
+    public function crear(){
+        $this -> conexion -> conectar();
+        $this -> conexion -> ejecutar($this -> productDAO -> crear());
+        $this -> conexion -> cerrarConexion();
+    }
+    public function actualizar(){
+        $this -> conexion -> conectar();
+        $this -> conexion -> ejecutar($this -> productDAO -> actualizar());
+        $this -> conexion -> cerrarConexion();
+    }
+    public function eliminar(){
+        $this -> conexion -> conectar();
+        $this -> conexion -> ejecutar($this -> productDAO -> eliminar());
+        $this -> conexion -> cerrarConexion();
+    }
     public function getProducts(){
         $this->conexion->conectar();
         $this -> conexion -> ejecutar($this -> productDAO -> getProducts());
