@@ -11,24 +11,29 @@ class CategoryDAO
         $this->category = $category;
     }
 
-    public function getAll(){
+    public function getAll()
+    {
         return "SELECT * FROM category";
     }
 
-    public function getById($id){
+    public function getById($id)
+    {
         return "SELECT * FROM category WHERE id = $id";
     }
-    public function crear(){
+    public function crear()
+    {
         return "insert into category(category)
-            values('" . $this -> category . ")";
+            values('" . $this->category . "')";
     }
 
-    public function actualizar(){
+    public function actualizar()
+    {
         return "update category set
-                category = '" . $this -> category . "',
-                where id = '" . $this -> id . "'";
+                category = '" . $this->category . "'
+                where id = '" . $this->id . "'";
     }
-    public function eliminar(){
-        return "delete from category where id ". $this -> id;
+    public function eliminar()
+    {
+        return "delete from category where id = " . $this->id;
     }
 }

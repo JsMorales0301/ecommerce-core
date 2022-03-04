@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\xampp\htdocs\ecommerce-core\db\connection.php';
+require_once '../db/connection.php';
 require_once 'C:\xampp\htdocs\ecommerce-core\models\CategoryDAO.php';
 
 class CategoryController{
