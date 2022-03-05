@@ -17,7 +17,15 @@ class CategoryController{
     public function crear(){
         $this -> conexion -> conectar();
         $this -> conexion -> ejecutar($this -> categoryDAO -> crear());
+        $this -> conexion -> ejecutar($this -> categoryDAO -> getAllByLast());
+        $categories = array();
+        if($this -> conexion ->numFilas() > 0) {
+            while ($row = $this->conexion->fetch()) {
+                $categories[] = $row;
+            }
+        }
         $this -> conexion -> cerrarConexion();
+        return $categories;
     }
     public function actualizar(){
         $this -> conexion -> conectar();

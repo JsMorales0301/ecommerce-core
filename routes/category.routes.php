@@ -15,10 +15,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $category = $_REQUEST["category"];
 
     $categoryController = new CategoryController(null, $category);
-    $categoryController->crear();
+    
 
     $message = array("message" => "Category created successfully");
-    echo json_encode($message);
+    echo json_encode($categoryController->crear());
 }
  else if ($_SERVER["REQUEST_METHOD"] == "GET"&&$_GET["id"]!=null) {
     $categoryController = new CategoryController();

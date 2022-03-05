@@ -20,6 +20,10 @@ class CategoryDAO
     {
         return "SELECT * FROM category WHERE id = $id";
     }
+    public function getAllByLast()
+    {
+        return "SELECT * FROM category order by id DESC";
+    }
     public function crear()
     {
         return "insert into category(category)
