@@ -31,7 +31,15 @@ class UserController
     public function crearUsuario(){
         $this->conexion->conectar();
         $this->conexion->ejecutar($this->userDAO->crearUsuario());
+        $this->conexion->ejecutar($this->userDAO->getAllDesc());
+        $usuarios = array();
+        if($this -> conexion ->numFilas() > 0) {
+            while ($row = $this->conexion->fetch()) {
+                $usuarios[] = $row;
+            }
+        }
         $this->conexion->cerrarConexion();
+        return $usuarios;
     }
     public function autenticar()
     {

@@ -27,4 +27,7 @@ class UserDAO
     public function autenticar(){
         return "SELECT *FROM user WHERE email='" .$this->email."' AND password='".$this->password."'";
     }
+    public function getAllDesc(){
+        return "SELECT *FROM user ORDER BY id DESC";
+    }
 }
