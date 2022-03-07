@@ -30,33 +30,50 @@ class ProductController
 
 
 
-    public function getProducts(){
+    public function getProducts()
+    {
         $this->conexion->conectar();
-        $this -> conexion -> ejecutar($this -> productDAO -> getProducts());
+        $this->conexion->ejecutar($this->productDAO->getProducts());
         $productos = array();
-        if($this -> conexion ->numFilas() > 0) {
+        if ($this->conexion->numFilas() > 0) {
             while ($row = $this->conexion->fetch()) {
                 $productos[] = $row;
             }
         }
-        $this -> conexion -> cerrarConexion();
+        $this->conexion->cerrarConexion();
         return $productos;
     }
 
-    public function getProductById($id){
+    public function getProductById($id)
+    {
         $this->conexion->conectar();
-        $this -> conexion -> ejecutar($this -> productDAO -> getProductById($id));
+        $this->conexion->ejecutar($this->productDAO->getProductById($id));
         $productos = array();
-        if($this -> conexion ->numFilas() > 0) {
+        if ($this->conexion->numFilas() > 0) {
             while ($row = $this->conexion->fetch()) {
                 $productos[] = $row;
             }
         }
-        $this -> conexion -> cerrarConexion();
+        $this->conexion->cerrarConexion();
         return $productos;
     }
 
-    public function __toString(){
+    public function getProductPaginate($pagina, $regPag)
+    {
+        $this->conexion->conectar();
+        $this->conexion->ejecutar($this->productDAO->getProductPaginate($pagina, $regPag));
+        $productos = array();
+        if ($this->conexion->numFilas() > 0) {
+            while ($row = $this->conexion->fetch()) {
+                $productos[] = $row;
+            }
+        }
+        $this->conexion->cerrarConexion();
+        return $productos;
+    }
+
+    public function __toString()
+    {
         return "ProductDAO{" .
             "id=" . $this->id .
             ", name='" . $this->name . '\'' .
@@ -211,7 +228,4 @@ class ProductController
     {
         $this->productDAO = $productDAO;
     }
-
-
-
 }

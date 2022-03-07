@@ -21,12 +21,19 @@ class ProductDAO
         $this->id_category = $id_category;
     }
 
-    public function getProducts(){
+    public function getProducts()
+    {
         return "SELECT id, name, description, price, image, stock, id_category_fk FROM product";
     }
 
-    public function getProductById($id){
+    public function getProductById($id)
+    {
         return "SELECT * FROM product WHERE id = $id";
+    }
+
+    public function getProductPaginate($pagina, $regPag)
+    {
+        return "SELECT * FROM product LIMIT $pagina,$regPag";
     }
 
     public function __toString()
