@@ -30,9 +30,12 @@ class ProductDAO
     }
     public function crear(){
         return "insert into product(id, name, description, price, image, stock,id_category_fk)
-            values('" . $this -> id . "', '" . $this -> name . "', '" . $this -> description . "', '" . $this -> price . "', '" . $this -> image . "', '" . $this -> stock . "', '" . $this -> id_category . ")";
+            values('" . $this -> id . "', '" . $this -> name . "', '" . $this -> description . "', " . $this -> price . ", '" . $this -> image . "', " . $this -> stock . ", " . $this -> id_category . ")";
     }
-
+    public function getAllByLast()
+    {
+        return "SELECT * FROM product order by id DESC";
+    }
     public function actualizar(){
         return "update product set
                 name = '" . $this -> name . "',
