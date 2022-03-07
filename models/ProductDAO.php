@@ -30,6 +30,27 @@ class ProductDAO
     {
         return "SELECT * FROM product WHERE id = $id";
     }
+    public function crear(){
+        return "insert into product(id, name, description, price, image, stock,id_category_fk)
+            values('" . $this -> id . "', '" . $this -> name . "', '" . $this -> description . "', " . $this -> price . ", '" . $this -> image . "', " . $this -> stock . ", " . $this -> id_category . ")";
+    }
+    public function getAllByLast()
+    {
+        return "SELECT * FROM product order by id DESC";
+    }
+    public function actualizar(){
+        return "update product set
+                name = '" . $this -> name . "',
+                description = '" . $this -> description . "',
+                price= '" . $this -> price . "',
+                image = '" . $this -> image . "',
+                stock = '" . $this -> stock . "',
+                id_category_fk = '" . $this -> id_category . "'
+                where id = '" . $this -> id . "'";
+    }
+    public function eliminar(){
+        return "delete from product where id ". $this -> id;
+    }
 
     public function getProductPaginate($pagina, $regPag)
     {

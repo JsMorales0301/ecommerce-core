@@ -31,9 +31,30 @@ class UserController
     public function crearUsuario(){
         $this->conexion->conectar();
         $this->conexion->ejecutar($this->userDAO->crearUsuario());
+        $this->conexion->ejecutar($this->userDAO->getAllDesc());
+        $usuarios = array();
+        if($this -> conexion ->numFilas() > 0) {
+            while ($row = $this->conexion->fetch()) {
+                $usuarios[] = $row;
+            }
+        }
         $this->conexion->cerrarConexion();
+        return $usuarios;
     }
-
+    public function autenticar()
+    {
+        $this->conexion->conectar();
+        $this->conexion->ejecutar(($this->userDAO->autenticar()));
+        if($this->conexion->numFilas()==1)
+        {
+            $user = $this->conexion->fetch();
+            $this->conexion->cerrarConexion();
+            return $user;  
+        }
+        else{
+            return http_response_code(404);
+        }
+    }
 
 
 }

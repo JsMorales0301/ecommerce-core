@@ -14,8 +14,9 @@ class ProductController
     private $id_category;
     private $conexion;
     private $productDAO;
+    private $category;
 
-    public function __construct($id = 0, $name = "", $description = "", $price = 0, $image = "", $stock = 0, $id_category = 0)
+    public function __construct($id = 0, $name = "", $description = "", $price = 0, $image = "", $stock = 0, $id_category = 0, $category = "")
     {
         $this->id = $id;
         $this->name = $name;
@@ -24,12 +25,38 @@ class ProductController
         $this->image = $image;
         $this->stock = $stock;
         $this->id_category = $id_category;
+        $this->category = $category;
         $this->conexion = new Conexion();
         $this->productDAO = new ProductDAO($this->id, $this->name, $this->description, $this->price, $this->image, $this->stock, $this->id_category);
     }
 
 
-
+    public function crear()
+    {
+        $this->conexion->conectar();
+        $this->conexion->ejecutar($this->productDAO->crear());
+        $this->conexion->ejecutar($this->productDAO->getAllByLast());
+        $productos = array();
+        if ($this->conexion->numFilas() > 0) {
+            while ($row = $this->conexion->fetch()) {
+                $productos[] = $row;
+            }
+        }
+        $this->conexion->cerrarConexion();
+        return $productos;
+    }
+    public function actualizar()
+    {
+        $this->conexion->conectar();
+        $this->conexion->ejecutar($this->productDAO->actualizar());
+        $this->conexion->cerrarConexion();
+    }
+    public function eliminar()
+    {
+        $this->conexion->conectar();
+        $this->conexion->ejecutar($this->productDAO->eliminar());
+        $this->conexion->cerrarConexion();
+    }
     public function getProducts()
     {
         $this->conexion->conectar();
