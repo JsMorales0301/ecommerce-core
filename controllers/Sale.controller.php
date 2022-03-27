@@ -43,4 +43,31 @@ class SaleController
         $this->conexion->cerrarConexion();
         return $productos[0];
     }
+    public function getAllSales()
+    {
+        $this->conexion->conectar();
+        $this->conexion->ejecutar($this->saleDAO->getSale());
+        $sales = array();
+        if ($this->conexion->numFilas() > 0) {
+            while ($row = $this->conexion->fetch()) {
+                $sales[] = $row;
+            }
+        }
+        $this->conexion->cerrarConexion();
+        return $sales;
+    }
+
+    public function getSaleBySeller()
+    {
+        $this->conexion->conectar();
+        $this->conexion->ejecutar($this->saleDAO->getSaleBySeller());
+        $sales = array();
+        if ($this->conexion->numFilas() > 0) {
+            while ($row = $this->conexion->fetch()) {
+                $sales[] = $row;
+            }
+        }
+        $this->conexion->cerrarConexion();
+        return $sales;
+    }
 }

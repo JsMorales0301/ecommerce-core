@@ -25,4 +25,11 @@ class SaleDAO
     {
         return "select * from sale ORDER by id DESC";
     }
+    public function getSaleBySeller()
+    {
+        return "SELECT * FROM sale as s
+                INNER JOIN sale_product as sp on s.id=sp.id_sale
+                INNER JOIN product as p on p.id = sp.id_product
+                WHERE p.id_user_fk =".$this->id_seller.";";
+    }
 }
