@@ -23,8 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $image = $_REQUEST["image"];
     $stock = $_REQUEST["stock"];
     $id_category = $_REQUEST["id_category"];
-
-    $productController = new ProductController(null, $name, $description, $price, $image, $stock, $id_category);
+    $id_user = $_REQUEST["id_user"];
+    $productController = new ProductController(null, $name, $description, $price, $image, $stock, $id_category,null,$id_user);
 
     $message = array("message" => "Product created successfully");
     echo json_encode($productController->crear());

@@ -12,8 +12,8 @@ class ProductController
     private $image;
     private $stock;
     private $id_category;
-    private $id_user;
     private $conexion;
+    private $id_user;
     private $productDAO;
     private $category;
 
