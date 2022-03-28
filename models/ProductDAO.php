@@ -9,8 +9,9 @@ class ProductDAO
     private $image;
     private $stock;
     private $id_category;
+    private $id_user;
 
-    public function __construct($id, $name, $description, $price, $image, $stock, $id_category)
+    public function __construct($id, $name, $description, $price, $image, $stock, $id_category,$id_user)
     {
         $this->id = $id;
         $this->name = $name;
@@ -19,6 +20,8 @@ class ProductDAO
         $this->image = $image;
         $this->stock = $stock;
         $this->id_category = $id_category;
+        $this->id_user = $id_user;
+
     }
 
     public function getProducts()
@@ -31,12 +34,16 @@ class ProductDAO
         return "SELECT * FROM product WHERE id = $id";
     }
     public function crear(){
-        return "insert into product(id, name, description, price, image, stock,id_category_fk)
-            values('" . $this -> id . "', '" . $this -> name . "', '" . $this -> description . "', " . $this -> price . ", '" . $this -> image . "', " . $this -> stock . ", " . $this -> id_category . ")";
+        return "insert into product(id, name, description, price, image, stock,id_category_fk,id_user_fk)
+            values('" . $this -> id . "', '" . $this -> name . "', '" . $this -> description . "', " . $this -> price . ", '" . $this -> image . "', " . $this -> stock . ", " . $this -> id_category . ", ". $this -> id_user .")";
     }
     public function getAllByLast()
     {
         return "SELECT * FROM product order by id DESC";
+    }
+    public function getAllBySeller()
+    {
+        return "SELECT * FROM product WHERE id_user_fk =".$this->id_user;
     }
     public function actualizar(){
         return "update product set

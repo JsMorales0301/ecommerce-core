@@ -12,11 +12,12 @@ class ProductController
     private $image;
     private $stock;
     private $id_category;
+    private $id_user;
     private $conexion;
     private $productDAO;
     private $category;
 
-    public function __construct($id = 0, $name = "", $description = "", $price = 0, $image = "", $stock = 0, $id_category = 0, $category = "")
+    public function __construct($id = 0, $name = "", $description = "", $price = 0, $image = "", $stock = 0, $id_category = 0, $category = "",$id_user=0)
     {
         $this->id = $id;
         $this->name = $name;
@@ -25,9 +26,10 @@ class ProductController
         $this->image = $image;
         $this->stock = $stock;
         $this->id_category = $id_category;
+        $this->id_user = $id_user;
         $this->category = $category;
         $this->conexion = new Conexion();
-        $this->productDAO = new ProductDAO($this->id, $this->name, $this->description, $this->price, $this->image, $this->stock, $this->id_category);
+        $this->productDAO = new ProductDAO($this->id, $this->name, $this->description, $this->price, $this->image, $this->stock, $this->id_category,$this->id_user);
     }
 
 
@@ -70,7 +72,19 @@ class ProductController
         $this->conexion->cerrarConexion();
         return $productos;
     }
-
+    public function getProductsBySeller()
+    {
+        $this->conexion->conectar();
+        $this->conexion->ejecutar($this->productDAO->getAllBySeller($this->id_user));
+        $productos = array();
+        if ($this->conexion->numFilas() > 0) {
+            while ($row = $this->conexion->fetch()) {
+                $productos[] = $row;
+            }
+        }
+        $this->conexion->cerrarConexion();
+        return $productos;
+    }
     public function getProductById($id)
     {
         $this->conexion->conectar();
