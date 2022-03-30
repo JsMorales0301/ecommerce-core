@@ -21,3 +21,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $saleProductController = new SaleProductController($id_sale, $id_product, $amount);
     $saleProductController->create();
 }
+if($_SERVER['REQUEST_METHOD'] == 'GET'){
+    $id_sale = $_REQUEST["id_sale"];
+    $saleProductController = new SaleProductController();
+    echo json_encode($saleProductController->getSaleProductById($id_sale));
+}
+if($_SERVER['REQUEST_METHOD'] == 'PUT'){
+    $id_sale = $_REQUEST["id_sale"];
+    $id_product = $_REQUEST["id_product"];
+    $amount = $_REQUEST["amount"];
+
+    $saleProductController = new SaleProductController();
+    $saleProductController->updateMountProduct($id_sale, $id_product, $amount);
+}
+if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
+    $id_product = $_REQUEST["id_product"];
+    $id_sale = $_REQUEST["id_sale"];
+
+    $saleProductController = new SaleProductController();
+    $saleProductController->deleteProduct($id_product, $id_sale);
+}

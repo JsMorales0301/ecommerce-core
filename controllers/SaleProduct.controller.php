@@ -26,4 +26,59 @@ class SaleProductController
         $this->conexion->ejecutar($this->saleProductDAO->create());
         $this->conexion->cerrarConexion();
     }
+
+    public function getSaleProductById($id_sale)
+    {
+        $this->conexion->conectar();
+        $this->conexion->ejecutar($this->saleProductDAO->getSaleProductById($id_sale));
+        $sale = array();
+        if($this->conexion->numFilas() > 0)
+        {
+            while($fila = $this->conexion->fetch())
+            {
+                $sale[] = $fila;
+            }
+        }
+        $this->conexion->cerrarConexion();
+        return $sale;
+    }
+
+    public function updateMountProduct($id_sale, $id_product, $amount)
+    {
+        $this->conexion->conectar();
+        $this->conexion->ejecutar($this->saleProductDAO->updateMountProduct($id_sale, $id_product, $amount));
+        $this->conexion->cerrarConexion();
+    }
+
+    public function deleteProduct($id_product, $id_sale)
+    {
+        $this->conexion->conectar();
+        $this->conexion->ejecutar($this->saleProductDAO->deleteProduct($id_product, $id_sale));
+        $this->conexion->cerrarConexion();
+    }
+
+    public function updateShopping($id, $date, $state, $total)
+    {
+        $this->conexion->conectar();
+        $this->conexion->ejecutar($this->saleProductDAO->updateShopping($id, $date, $state, $total));
+        $this->conexion->cerrarConexion();
+    }
+
+    public function getSaleProductByIdSale($id_client)
+    {
+        $this->conexion->conectar();
+        $this->conexion->ejecutar($this->saleProductDAO->getSaleProductByIdSale($id_client));
+        $sale = array();
+        if($this->conexion->numFilas() > 0)
+        {
+            while($fila = $this->conexion->fetch())
+            {
+                $sale[] = $fila;
+            }
+        }
+        $this->conexion->cerrarConexion();
+        return $sale;
+    }
+
+    
 }

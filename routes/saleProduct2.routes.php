@@ -1,6 +1,5 @@
 <?php
 
-require_once "C:/xampp/htdocs/ecommerce-core/controllers/Sale.controller.php";
 require_once "C:/xampp/htdocs/ecommerce-core/controllers/SaleProduct.controller.php";
 
 
@@ -14,17 +13,17 @@ if ($method == "OPTIONS") {
     die();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
     $id = $_REQUEST["id"];
     $date = $_REQUEST["date"];
-    $id_client_fk = $_REQUEST["id_client_fk"];
     $state = $_REQUEST["state"];
     $total = $_REQUEST["total"];
-
-    $saleController = new SaleController($id, $date, $id_client_fk, $state, $total);
-    echo json_encode($saleController->crear());
+    $saleProductController = new SaleProductController();
+    $saleProductController->updateShopping($id, $date, $state, $total);
 }
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $saleController = new SaleController();
-    echo json_encode($saleController->getSale());
+    $id_client = $_REQUEST["id_client"];
+    
+    $saleProductController = new SaleProductController();
+    echo json_encode($saleProductController->getSaleProductByIdSale($id_client));
 }

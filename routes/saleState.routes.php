@@ -14,17 +14,8 @@ if ($method == "OPTIONS") {
     die();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_REQUEST["id"];
-    $date = $_REQUEST["date"];
-    $id_client_fk = $_REQUEST["id_client_fk"];
-    $state = $_REQUEST["state"];
-    $total = $_REQUEST["total"];
-
-    $saleController = new SaleController($id, $date, $id_client_fk, $state, $total);
-    echo json_encode($saleController->crear());
-}
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $idClient = $_REQUEST["idClient"];
     $saleController = new SaleController();
-    echo json_encode($saleController->getSale());
+    echo json_encode($saleController->getSaleState($idClient));
 }
