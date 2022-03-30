@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $state = $_REQUEST["state"];
     $total = $_REQUEST["total"];
 
-    $saleController = new SaleController($id, $date, $id_client_fk, $state, $total);
+    $saleController = new SaleController($id, $date,null, $id_client_fk, $state, $total);
     echo json_encode($saleController->crear());
 }
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
