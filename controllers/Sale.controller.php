@@ -3,7 +3,7 @@
 require_once 'C:\xampp\htdocs\ecommerce-core\models\SaleDAO.php';
 require_once 'C:\xampp\htdocs\ecommerce-core\db\connection.php';
 
-class SaleController
+class SaleController 
 {
     private $id;
     private $date;
